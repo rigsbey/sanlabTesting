@@ -3,7 +3,7 @@ from sanic.response import json, text
 import requests
 from sanic import response
 
-app = Sanic("hello_example")
+app = Sanic("valute")
 
 @app.route("/course/<currency>")
 async def get_currency(request, currency):  
@@ -27,13 +27,8 @@ async def test(request):
     # Рублей
     rub = amount * data['Valute'][request.args["from_currency"][0]]['Value']
     # Валюты на выходе
-    res = round(rub / data['Valute'][request.args["to_currency"][0]]['Value'], 2) 
-    return response.json({"currency":request.args["to_currency"], "Result": res})
-
-@app.route("/hello")
-async def get_currency(request):  
-  return response.json({"currency":"Hello"})
-
+    resultValue = round(rub / data['Valute'][request.args["to_currency"][0]]['Value'], 2) 
+    return response.json({"currency":request.args["to_currency"][0], "Result": resultValue})
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=8000)
