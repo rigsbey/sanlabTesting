@@ -30,6 +30,10 @@ async def test(request):
     res = round(rub / data['Valute'][request.args["to_currency"][0]]['Value'], 2) 
     return response.json({"currency":request.args["to_currency"], "Result": res})
 
+@app.route("/hello")
+async def get_currency(request):  
+  return response.json({"currency":"Hello"})
+
 
 if __name__ == "__main__":
-  app.run(host="127.0.0.1", port=8000)
+  app.run(host="0.0.0.0", port=8000)
